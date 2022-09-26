@@ -3,10 +3,6 @@ let
   gvariant = home-manager.lib.hm.gvariant;
 in
 {
-  imports = [
-    ./rofi.nix
-  ];
-
   home-manager.users.matt = {
     home.packages = with pkgs; [
       gnome.dconf-editor
