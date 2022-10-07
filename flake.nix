@@ -11,37 +11,50 @@
   };
 
   outputs = inputs@{ self, nixpkgs, ... }: {
-    # vm - vm for testing
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+    nixosConfigurations = {
+      # vm - vm for testing
+      vm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      modules = [
-        ./hosts/vm
-      ];
+        modules = [
+          ./hosts/vm
+        ];
 
-      specialArgs = inputs;
-    };
+        specialArgs = inputs;
+      };
 
-    # hydrogen - workstation/ gaming pc
-    nixosConfigurations.hydrogen = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      # hydrogen - workstation/ gaming pc
+      hydrogen = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      modules = [
-        ./hosts/hydrogen
-      ];
+        modules = [
+          ./hosts/hydrogen
+        ];
 
-      specialArgs = inputs;
-    };
+        specialArgs = inputs;
+      };
 
-    # helium - single node k8s server
-    nixosConfigurations.helium = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      # helium - hypothetical laptop
+      helium = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      modules = [
-        ./hosts/helium
-      ];
+        modules = [
+          ./hosts/helium
+        ];
 
-      specialArgs = inputs;
+        specialArgs = inputs;
+      };
+
+      # lithium - single node k3s cluster
+      lithium = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          ./hosts/lithium
+        ];
+
+        specialArgs = inputs;
+      };
     };
   };
 }
